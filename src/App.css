@@ -1,33 +1,131 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --element-color: rgb(243, 243, 243);
+  --element-muted: rgba(240, 240, 240, 0.5);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  background: radial-gradient(rgb(24, 63, 100), rgb(11, 21, 31));
+  color: var(--element-color);
+}
+
+.flex-column-h-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.text-center {
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.text-muted {
+  color: var(--element-muted);
+}
+
+.text-spaced {
+  letter-spacing: 4px;
+}
+
+.loading-bar-bg {
+  width: 100%;
+  margin: 40px 0;
+  height: 4px;
+  border: none;
+  background-color: var(--element-muted);
+  box-shadow: 10px 6px 12px rgba(0, 0, 0, 0.596);
+  border-radius: 50px;
+}
+
+.loading-bar {
+  background-color: var(--element-color);
+  width: 100%;
+  height: 100%;
+  transition: width 1s linear;
+  border-radius: 50px;
+}
+
+.btn {
+  border: 2px solid var(--element-muted);
+  border-radius: 100px;
+  background: none;
+  padding: 10px 13px;
+  font-size: 1rem;
+  margin: 0 10px;
+  cursor: pointer;
+  color: var(--element-muted);
+  transition: color 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+  border-color: var(--element-color);
+  color: var(--element-color);
+  transform: translate3d(0, -4px, 0);
+}
+
+.btn:disabled {
+  color: var(--element-muted);
+  border-color: var(--element-muted);
+  transform: translate3d(0, 0, 0);
+  cursor: not-allowed;
+}
+
+.settings-number {
+  font-size: 2rem;
+}
+
+#main {
+  height: 100vh;
+}
+
+#clock-container {
+  margin-top: 20vh;
+}
+
+#time-left {
+  font-size: 6rem;
+  line-height: 1;
+  font-family: "Anonymous Pro", monospace;
+}
+
+#time-left-label-container {
+  margin-top: 50px;
+  padding: 50px 50px 10px 50px;
+}
+
+#length-settings-group-container {
+  display: flex;
+}
+
+.length-settings-group {
+  padding: 0 50px;
+}
+
+#main-heading {
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+@media (max-width: 500px) {
+  #time-left {
+    font-size: 4rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .length-settings-group {
+    padding: 0 5px;
+  }
+
+  #main-heading {
+    font-size: 1.5rem;
+  }
+
+  #clock-container {
+    margin-top: 50px;
   }
 }
