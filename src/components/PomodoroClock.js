@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import Break from "./Break";
+import Session from "./Session";
+import Header from "./Header";
+import Button from "./Button";
+import LoadingBar from "./LoadingBar";
+import TimerDisplay from "./TimerDisplay";
 
 class PomodoroClock extends Component {
   constructor() {
@@ -134,97 +140,29 @@ class PomodoroClock extends Component {
 
     return (
       <main id="main" className="flex-column-h-center">
-        <div className="flex-column-h-center" id="clock-container">
-          <h1 id="main-heading" className="text-center text-muted">
-            <span className="far fa-clock" /> Pomodoro Clock
-          </h1>
-          <div id="time-left-label-container">
-            <p id="timer-label" className="text-muted text-spaced">
-              {this.state.breakOngoing ? "BREAK" : "SESSION"}
-            </p>
-            <p id="time-left" className="text-center">
-              {displayText}
-            </p>
-          </div>
-          <div>
-            <button
-              id="start_stop"
-              className="btn"
-              onClick={this.startOrStopTimer}
-            >
-              <span className={startStopButtonStyles} />
-            </button>
-            <button id="reset" className="btn" onClick={this.resetClock}>
-              <span className="fas fa-stop" />
-            </button>
-          </div>
-          <div className="loading-bar-bg">
-            <div
-              className="loading-bar"
-              style={{ width: this.state.loadingBarWidth + "%" }}
-            />
-          </div>
+        <div id="clock-container">
+          <Header />
+          <TimerDisplay
+            breakOngoing={this.state.breakOngoing}
+            displayText={displayText}
+          />
+          <Button
+            startOrStopTimer={this.startOrStopTimer}
+            resetClock={this.resetClock}
+            startStopButtonStyles={startStopButtonStyles}
+          />
+          <LoadingBar loadingBarWidth={this.state.loadingBarWidth} />
           <div id="length-settings-group-container">
-            <div className="length-settings-group flex-column-h-center">
-              <p id="break-label" className="text-muted text-spaced">
-                BREAK
-              </p>
-              <p id="break-length" className="settings-number">
-                {this.state.breakLength}
-              </p>
-              <div>
-                <button
-                  disabled={this.state.timerIsRunning}
-                  id="break-increment"
-                  className="btn"
-                  onClick={() => {
-                    this.updateTimerSetting("breakLength", 1);
-                  }}
-                >
-                  <span className="fas fa-plus" />
-                </button>
-                <button
-                  disabled={this.state.timerIsRunning}
-                  id="break-decrement"
-                  className="btn"
-                  onClick={() => {
-                    this.updateTimerSetting("breakLength", -1);
-                  }}
-                >
-                  <span className="fas fa-minus" />
-                </button>
-              </div>
-            </div>
-            <div className="length-settings-group flex-column-h-center">
-              <p id="session-label" className="text-muted text-spaced">
-                SESSION
-              </p>
-              <p id="session-length" className="settings-number">
-                {this.state.sessionLength}
-              </p>
-              <div>
-                <button
-                  disabled={this.state.timerIsRunning}
-                  id="session-increment"
-                  className="btn"
-                  onClick={() => {
-                    this.updateTimerSetting("sessionLength", 1);
-                  }}
-                >
-                  <span className="fas fa-plus" />
-                </button>
-                <button
-                  disabled={this.state.timerIsRunning}
-                  id="session-decrement"
-                  className="btn"
-                  onClick={() => {
-                    this.updateTimerSetting("sessionLength", -1);
-                  }}
-                >
-                  <span className="fas fa-minus" />
-                </button>
-              </div>
-            </div>
+            <Break
+              timerIsRunning={this.state.timerIsRunning}
+              breakLength={this.state.breakLength}
+              updateTimerSetting={this.updateTimerSetting}
+            />
+            <Session
+              sessionLength={this.state.sessionLength}
+              updateTimerSetting={this.updateTimerSetting}
+              timerIsRunning={this.state.timerIsRunning}
+            />
           </div>
           <audio id="beep" preload="auto" src="https://goo.gl/65cBl1" />
         </div>
